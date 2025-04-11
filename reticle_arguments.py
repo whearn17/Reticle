@@ -14,19 +14,41 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Replay web traffic from HTTP access logs.")
 
     parser.add_argument(
-        "-h",
-        "--hostname",
+        "-u",
+        "--url",
         type=str,
         required=True,
-        help="The base website to replay logs for.",
+        help="Base URL of the website to replay logs for.",
     )
 
     parser.add_argument(
-        "-s",
-        "--screenshot",
+        "-l",
+        "--log",
         type=str,
         required=True,
-        help="Path to save the screenshot.",
+        help="Path to the HTTP access log file to replay.",
+    )
+
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        required=True,
+        help="Output file path to save the screenshot (e.g., ./output/screenshot.png).",
+    )
+
+    parser.add_argument(
+        "--ignore",
+        nargs="+",
+        default=[],
+        help="List of substrings to block if found in the request URI.",
+    )
+
+    parser.add_argument(
+        "--modify-params",
+        nargs="+",
+        metavar="KEY=VALUE",
+        help="Modify one or more query parameter values in the URL if they exist. Example: --modify-param session_id=12345 token=xyz123",
     )
 
     return parser.parse_args()
