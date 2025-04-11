@@ -34,7 +34,7 @@ class _Apache2LogProcessor(_HTTPAccessLogProcessor):
     Processor for Apache2 HTTP access logs.
     """
 
-    def get_url_list(self, logs: List) -> List:
+    def get_uri_list(self, logs: List) -> List:
         """
         Extracts URLs from Apache2 log entries.
 
@@ -113,6 +113,6 @@ def process_log_file(file_path: str) -> List:
 
                 logs.append(line)
 
-    url_list = log_processor.get_url_list(logs)
+    uri_list = log_processor.get_uri_list(logs)
 
-    return url_list
+    return uri_list
